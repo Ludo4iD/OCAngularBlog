@@ -39,14 +39,31 @@ export class PostService {
   }
 
   removePost(post: Post) {
-    const postIndexToRemove = this.posts.findIndex(
+    const postIndexToRemove = this.findIndexPost(post);
+    this.posts.splice(postIndexToRemove, 1);
+    this.emitPostSubject();
+  }
+
+  increaseLoveItsOnOne(post: Post) {
+    const indexPost = this.findIndexPost(post);
+    this.posts[indexPost].loveIts++;
+    this.emitPostSubject();
+  }
+
+  decreaseLoveItsOnOne(post: Post) {
+    const indexPost = this.findIndexPost(post);
+    this.posts[indexPost].loveIts--;
+    this.emitPostSubject();
+  }
+
+  private findIndexPost(post: Post) {
+    return this.posts.findIndex(
       (postEl) => {
         if (postEl === post) {
           return true;
         }
       }
     );
-    this.posts.splice(postIndexToRemove, 1);
-    this.emitPostSubject();
   }
+
 }

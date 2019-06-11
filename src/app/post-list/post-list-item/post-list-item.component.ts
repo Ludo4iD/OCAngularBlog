@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-post-list-item',
@@ -17,11 +18,11 @@ export class PostListItemComponent implements OnInit {
   }
 
   onIncreaseLoveIts() {
-    this.post.loveIts++;
+    this.postService.increaseLoveItsOnOne(this.post);
   }
 
   onDecreaseLoveIts() {
-    this.post.loveIts--;
+    this.postService.decreaseLoveItsOnOne(this.post);
   }
 
   onRemovePost() {
